@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-This is a very simple python script to create mock ups of LinkedIn posts for better visibility. Please note this is a work in progress and it only serves for my learning and educational purposes. 
+This is a very simple python script to create mock ups of LinkedIn posts for better visibility. Please note this is a work in progress and it only serves for my learning and educational purposes. This is version 0.91 and it is still not functional.
 
 ## Features
 - Generate LinkedIn post screenshots with custom text, profile photo, and logo overlay
