@@ -30,7 +30,7 @@ font = ImageFont.truetype("Arial", FONT_SIZE)
 small_font = ImageFont.truetype("Arial", SMALL_FONT_SIZE)
 bold_font = ImageFont.truetype("Arial Bold", BOLD_FONT_SIZE)
 
-# Add text to the image
+# Add text to the image TODO: fit the text to the text box, as it doesn't fit now. Use line breaks as needed.
 text_width, text_height = draw.textsize(post_text, font=font)
 text_position = ((IMAGE_WIDTH - text_width) // 2, (IMAGE_HEIGHT - text_height) // 2)
 draw.text(text_position, post_text, fill=FONT_COLOR, font=font)
