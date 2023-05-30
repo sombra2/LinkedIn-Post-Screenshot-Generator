@@ -30,10 +30,35 @@ font = ImageFont.truetype("Arial", FONT_SIZE)
 small_font = ImageFont.truetype("Arial", SMALL_FONT_SIZE)
 bold_font = ImageFont.truetype("Arial Bold", BOLD_FONT_SIZE)
 
-# Add text to the image TODO: fit the text to the text box, as it doesn't fit now. Use line breaks as needed.
-text_width, text_height = draw.textsize(post_text, font=font)
-text_position = ((IMAGE_WIDTH - text_width) // 2, (IMAGE_HEIGHT - text_height) // 2)
-draw.text(text_position, post_text, fill=FONT_COLOR, font=font)
+# Add text to the image (with line breaks)
+max_text_width = IMAGE_WIDTH - 2 * TEXT_PADDING
+max_text_height = IMAGE_HEIGHT - 2 * TEXT_PADDING
+
+def split_text_into_lines(text, font, max_width):
+    words = text.split()
+    lines = []
+    current_line = words[0]
+    for word in words[1:]:
+        if draw.textsize(current_line + ' ' + word, font=font)[0] <= max_width:
+            current_line += ' ' + word
+        else:
+            lines.append(current_line)
+            current_line = word
+    lines.append(current_line)
+    return lines
+
+lines = split_text_into_lines(post_text, font, max_text_width)
+
+total_text_height = len(lines) * font.getsize("hg")[1]  # Calculate text height based on the font's line height
+
+text_position = ((IMAGE_WIDTH - max_text_width) // 2, (IMAGE_HEIGHT - total_text_height) // 2)
+
+current_y = text_position[1]
+for line in lines:
+    line_width, line_height = draw.textsize(line, font=font)
+    line_position = (text_position[0], current_y)
+    draw.text(line_position, line, fill=FONT_COLOR, font=font)
+    current_y += line_height
 
 # Load and resize the LinkedIn logo
 linkedin_logo = Image.open(LINKEDIN_LOGO_PATH)
